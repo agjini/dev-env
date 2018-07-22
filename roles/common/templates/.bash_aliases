@@ -36,7 +36,6 @@ function clone_group {
     cd -
 }
 
-
 function gitrepos_update_path {
     if [ -n "$(git --git-dir=${1} --work-tree=$(dirname ${1}) status --porcelain)" ]; then
        echo "* $(dirname ${1})" >> /tmp/gitrepos_update_report

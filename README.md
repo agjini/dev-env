@@ -1,25 +1,44 @@
-# Prerequisite
+#### What is it ?
 
-## Supported systems
+**_dev-env_** is a tool that setup a full stack development environment on a linux based OS.
+
+The installation is organized in 3 roles :
+- **common** : tmux (customized), gitprompt, docker, bash aliases
+- **back** : jdk, maven, gradle
+- **front** : node, yarn
+
+#### Supported systems
 
 - Debian
 
-To add support for other systems (such as Redhat). Search for debian parts of the installation.
+To add support for other systems (such as Redhat). Search for debian parts of the installation and add new implementations.
 
-## Install prerequisites
+### Install prerequisites
+
+The tool is based on ansible. Which allow to be launched several time without doing all tasks that have been already done.
 
 ```bash
 sudo apt install ansible
 ```
 
-# Install
+## Install
 
-### Fill vars.yml
+#### Fill your variables
 
 Fills the variables in vars.yml
 
-### Run install
+```bash
+vi vars.yml
+```
+
+#### Run the install
 
 ```bash
 ./install.sh
 ```
+
+## Credits
+
+This tool is greatly inspired from
+- Michael Bitard works (tmux conf, bash aliases, ansible base)
+- Development environment setup and good practices @ LivingObjects
