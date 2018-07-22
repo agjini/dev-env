@@ -1,4 +1,4 @@
-#### What is it ?
+## What is it ?
 
 **_dev-env_** is a tool that setup a full stack development environment on a linux based OS.
 
@@ -9,11 +9,13 @@ The installation is organized in 3 roles :
 
 #### Supported systems
 
-- Debian
+- Debian based
+
+The tools has been tested on `Ubuntu bionic beaver (18.04)`
 
 To add support for other systems (such as Redhat). Search for debian parts of the installation and add new implementations.
 
-### Install prerequisites
+## Install prerequisites
 
 The tool is based on ansible. Which allow to be launched several time without doing all tasks that have been already done.
 
@@ -40,5 +42,5 @@ vi vars.yml
 ## Credits
 
 This tool is greatly inspired from
-- Michael Bitard works (tmux conf, bash aliases, ansible base)
+- Michaël Bitard works (tmux conf, bash aliases, ansible base)
 - Development environment setup and good practices @ LivingObjects
