@@ -1,0 +1,18 @@
+
+- name: Install node {{ node_version }}
+  unarchive:
+    src: https://nodejs.org/dist/v{{ node_version }}/node-v{{ node_version }}-linux-x64.tar.gz
+    dest: ~/applications/
+    remote_src: true
+    creates: ~/applications/node-v{{ node_version }}-linux-x64
+- file: state=link src=~/applications/node-v{{ node_version }}-linux-x64 dest=~/applications/node
+- file: src=~/applications/node/bin/node dest=/usr/bin/node state=link
+- file: src=~/applications/node/bin/npm dest=/usr/bin/npm state=link
+- npm: global=true name=json state=latest
+- npm: global=true name=lerna state=latest
+- file: src=~/applications/node/bin/json dest=/usr/bin/json state=link
+- file: src=~/applications/node/bin/lerna dest=/usr/bin/lerna state=link
+
+#clean
+- file: path=~/applications/node-v{{ node_previous_version }}-linux-x64.tar.gz state=absent
+- file: path=~/applications/node-v{{ node_previous_version }}-linux-x64 state=absent

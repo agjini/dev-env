@@ -1,0 +1,22 @@
+---
+- file: path=~/applications state=directory
+- file: path=~/bin state=directory
+- file: path=~/.ssh state=directory
+- template: src=templates/.gitconfig dest=~/.gitconfig
+- template: src=templates/.tmux.conf dest=~/.tmux.conf
+- template: src=templates/.bashrc dest=~/.bashrc mode=0755
+- template: src=templates/.bash_profile dest=~/.bash_profile mode=0755
+- template: src=templates/.bash_aliases dest=~/.bash_aliases mode=0755
+- template: src=templates/.ssh/config dest=~/.ssh/config
+
+- git:
+    repo: https://github.com/magicmonty/bash-git-prompt.git
+    dest: ~/.bash-git-prompt
+    update: no
+
+- name: Retrieve git-repos-update-all.sh
+  get_url: 
+    url: https://gist.githubusercontent.com/Marthym/573c9aff4acdfb583316/raw
+    dest: ~/bin/git-repos-update-all.sh
+    mode: 0755
+    force: yes

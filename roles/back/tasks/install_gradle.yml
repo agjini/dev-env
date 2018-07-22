@@ -1,0 +1,8 @@
+
+- name: Install gradle {{ gradle_version }}
+  unarchive:
+    src: https://downloads.gradle.org/distributions/gradle-{{ gradle_version }}-all.zip
+    dest: ~/applications
+    remote_src: yes
+    creates: ~/applications/gradle-{{ gradle_version }}
+- file: src=~/applications/gradle-{{ gradle_version }} dest=~/applications/gradle state=link

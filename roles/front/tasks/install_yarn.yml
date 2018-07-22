@@ -1,0 +1,19 @@
+# yarn repo
+- apt_key:
+    url: "https://dl.yarnpkg.com/debian/pubkey.gpg"
+    state: present
+
+#clean
+- file: path=/etc/apt/sources.list.d/yarn.list state=absent
+
+- apt_repository:
+    repo: deb http://dl.yarnpkg.com/debian/ stable main
+    state: present
+    filename: 'yarnpkg'
+    update_cache: yes
+
+- apt: 
+    name: yarn
+    state: latest
+    install_recommends: no
+  become: yes

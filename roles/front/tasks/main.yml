@@ -1,0 +1,6 @@
+- name: Install node
+  import_tasks: install_node.yml
+
+- name: Install yarn
+  import_tasks: install_yarn.yml
+  when: ansible_os_family == "Debian"

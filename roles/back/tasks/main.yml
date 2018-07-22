@@ -1,0 +1,8 @@
+- name: Install java
+  import_tasks: install_java.yml
+
+- name: Install gradle
+  import_tasks: install_gradle.yml
+
+- name: Install maven
+  import_tasks: install_maven.yml

@@ -1,0 +1,55 @@
+
+# git-lfs (large file system)
+- shell: curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+  warn: no
+
+- name: Add docker apt-key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+  become: yes
+- apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ lsb_release }} stable
+    state: present
+    update_cache: yes
+  become: yes
+
+- name: Upgrade minimal working tools ...
+  apt: 
+    name: "{{ item }}"
+    state: latest
+    install_recommends: no
+  with_items:
+  - build-essential
+  - tmux
+  - httpie
+  - git-lfs
+  - jq
+  - git-flow
+  - docker-ce
+  - unzip
+  become: yes
+
+- name: Allow docker for non root
+  command: groupadd -f docker
+  become: yes
+- user: name={{ansible_user}} groups=docker append=yes
+  become: yes
+
+- name: Install git-lfs
+  shell: git lfs install
+
+- name: Install docker-compose
+  get_url:
+    url: https://github.com/docker/compose/releases/download/{{ dc_version }}/docker-compose-{{ ansible_system }}-{{ ansible_userspace_architecture }}
+    dest: /usr/local/bin/docker-compose
+    mode: 0755
+  become: yes
+
+# Tmux
+- name: Install tmux plugin manager
+  file: path=~/.tmux/plugins/tpm state=directory
+- git: 
+    repo: https://github.com/tmux-plugins/tpm 
+    dest: ~/.tmux/plugins/tpm 
+    update: no

@@ -1,0 +1,11 @@
+
+- name: Install maven {{ maven_version }}
+  unarchive:
+    src: http://www-us.apache.org/dist/maven/maven-3/{{ maven_version }}/binaries/apache-maven-{{ maven_version }}-bin.zip
+    dest: ~/applications
+    remote_src: yes
+    creates: ~/applications/apache-maven-{{ maven_version }}
+- file: src=~/applications/apache-maven-{{ maven_version }} dest=~/applications/maven state=link
+
+- file: path=~/.ssh state=directory
+- template: src=templates/settings.xml dest=~/.m2/settings.xml

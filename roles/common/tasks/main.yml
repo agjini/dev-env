@@ -1,0 +1,7 @@
+
+- name: Build home
+  import_tasks: home_building.yml
+
+- name: Install minimal tools
+  import_tasks: minimal_tools.yml
+  when: ansible_os_family == "Debian"
