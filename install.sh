@@ -1,3 +1,5 @@
 #!/bin/bash
 
-sudo ansible-playbook install.yml --extra-vars "lsb_release=$(lsb_release -cs)"
+become_user=${USER}
+
+ansible-playbook install.yml --become --extra-vars "lsb_release=$(lsb_release -cs)"

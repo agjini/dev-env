@@ -7,5 +7,5 @@
     creates: ~/applications/apache-maven-{{ maven_version }}
 - file: src=~/applications/apache-maven-{{ maven_version }} dest=~/applications/maven state=link
 
-- file: path=~/.ssh state=directory
+- file: path=~/.m2 state=directory
 - template: src=templates/settings.xml dest=~/.m2/settings.xml
