@@ -28,6 +28,7 @@
   - git-flow
   - docker-ce
   - unzip
+  - vim
   become: yes
 
 - name: Allow docker for non root
