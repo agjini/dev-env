@@ -169,10 +169,14 @@ function wisdom-dev-update_all {
 ############# NEO4J #############
 #################################
 
-alias neo4j_start='docker run -d --name neo4j -p 7474:7474 -v ~/applications/neo4j/data:/data registry.liveaction.com/neo4j:latest'
+function neo4j_start {
+	docker run -d --name neo4j -p 7474:7474 -v ~/applications/neo4j/data:/data registry.liveaction.com/neo4j:latest
+}
 
-alias neo4j_stop='docker rm neo4j'
-
+function neo4j_stop {
+	docker stop neo4j
+	docker rm neo4j
+}
 
 function neo4j_dump_on_local {
     if [ $# -lt 1 ]; then
