@@ -25,10 +25,9 @@ alias gitbranchpurge='git fetch -p && git branch --merged | grep -v "\*" | grep 
 function clone_group { 
     TOKEN=${1};
     GROUP=${2};
-    GROUP_ID=`http git.livingobjects.com/api/v3/groups?private_token=${TOKEN} | jq '.[] | select(.path=="'${GROUP}'") | .id'`;
     mkdir -p ${GROUP};
     cd ${GROUP};
-    for PROJECT in `http --pretty format git.livingobjects.com/api/v3/groups/${GROUP_ID}?private_token=${TOKEN} | jq .projects | jq -r .[].ssh_url_to_repo`;
+    for PROJECT in `http https://git.livingobjects.com:443/api/v3/groups/${GROUP}?private_token=${TOKEN} | jq .projects | jq -r .[].ssh_url_to_repo`;
     do
         echo Cloning ${PROJECT};
         git clone ${PROJECT};
