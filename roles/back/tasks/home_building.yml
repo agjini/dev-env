@@ -1,0 +1,2 @@
+---
+- template: src=templates/.back_bash_aliases dest=~/.back_bash_aliases mode=0755
