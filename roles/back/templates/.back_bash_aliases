@@ -169,9 +169,9 @@ function wisdom-dev-update_all {
 ############# NEO4J #############
 #################################
 
-alias neo4j_start='~/applications/neo4j/bin/neo4j start'
+alias neo4j_start='docker run -d --name neo4j -p 7474:7474 -v ~/applications/neo4j/data:/data registry.liveaction.com/neo4j:latest'
 
-alias neo4j_stop='~/applications/neo4j/bin/neo4j stop'
+alias neo4j_stop='docker rm neo4j'
 
 
 function neo4j_dump_on_local {
@@ -187,11 +187,11 @@ function neo4j_dump_on_local {
 
     neo4j_stop
 
-    sudo rm -rf ~/applications/neo4j/data
+    rm -rf ~/applications/neo4j/data
 
     scp ${IP}:~/graph.tar.gz /tmp
 
-    mkdir ~/applications/neo4j/data
+    mkdir -p ~/applications/neo4j/data
     tar xvzf /tmp/graph.tar.gz -C ~/applications/neo4j/data/
 
     neo4j_start
