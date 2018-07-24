@@ -63,11 +63,12 @@ function wisdom-dev-update {
     fi
 
     for proj in $@; do
-       baseappdir="~/workspace/longback/${proj}/${proj}-longd-application"
+       baseappdir="${HOME}/workspace/longback/${proj}/${proj}-longd-application"
        appdir="${baseappdir}/target/longd-app"
+       ls ${appdir}
        if [ ! -d "${baseappdir}" ]; then
            echo "longd-app not found at ${appdir}, trying the old way..."
-           baseappdir="~/workspace/longback/${proj}/${proj}-wisdom-application"
+           baseappdir="${HOME}/workspace/longback/${proj}/${proj}-wisdom-application"
            appdir="${baseappdir}/target/wisdom+${proj}/application"
        fi
        if [ ! -d "${appdir}" ]; then
