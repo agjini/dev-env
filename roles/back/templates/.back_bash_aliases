@@ -210,9 +210,9 @@ function neo4j_dump_nightly_on_local {
 }
 
 function neo4j_purge {
-    neo4j_stop
-    sudo rm -rf ~/applications/neo4j/data
-    mkdir ~/applications/neo4j/data
+    neo4j_stop;
+    sudo rm -rf ~/applications/neo4j;
+    mkdir -p ~/applications/neo4j/data;
     neo4j_start
 }
 
@@ -228,7 +228,6 @@ function neo4j_stash_pop {
     tar xvfz /tmp/graph.db_stash.tar.gz -C ~/applications/neo4j/data/
     neo4j_start
 }
-
 
 function neo4j_delete_last_version {
     if [ $# -lt 1 ]; then
@@ -256,7 +255,6 @@ function neo4j_delete_last_version {
       -H "Content-Type: application/json;charset=utf-8" -X POST -d "${queryJson}" "http://${NEO4J_HOST}:${NEO4J_PORT}/db/data/transaction/commit" \
       | jq -r '.results[0].stats.nodes_deleted as $deleted | .results[].data[].row[] as $version | if $deleted > 0 then "\($version) deleted !" else "no version found" end'
 }
-
 
 #################################
 ############# MYSQL #############

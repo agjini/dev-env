@@ -15,14 +15,19 @@ alias ..=' cd ..'
 alias gti='git'
 alias alais='alias'
 alias gitrepos_update_all='~/bin/git-repos-update-all.sh'
-alias gitrepos_update_all_fast="echo -e '\e[1m\e[31mUse gitrepos_update_all instead !\e[0m\n' && gitrepos_update_all"
 
 alias ack='ack-grep'
 alias tkillw='tmux kill-window -t $1'
 
 alias gitbranchpurge='git fetch -p && git branch --merged | grep -v "\*" | grep -v "master" | grep -v "develop" | xargs -n 1 git branch -d'
 
-function clone_group { 
+function clone_group {
+    if [ $# -ne 2 ]
+    then
+        echo "Usage : clone_group <GITLAB_ACCESS_TOKEN> <GROUP_TO_CLONE>"
+        echo "    GITLAB_ACCESS_TOKEN can be generated at : https://git.livingobjects.com/profile/personal_access_tokens"
+        return 1;
+    fi
     TOKEN=${1};
     GROUP=${2};
     mkdir -p ${GROUP};
