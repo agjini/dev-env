@@ -5,6 +5,6 @@
     dest: ~/applications/jdk.tar.gz
     headers: 'Cookie:oraclelicense=accept-securebackup-cookie'
 - command: tar xvfz ~/applications/jdk.tar.gz -C ~/applications
-  creates: ~/applications/jdk-{{ oracle_jdk_version }}
-  warn: no
+  args:
+    creates: ~/applications/jdk-{{ oracle_jdk_version }}
 - file: src=~/applications/jdk-{{ oracle_jdk_version }} dest=~/applications/jdk state=link

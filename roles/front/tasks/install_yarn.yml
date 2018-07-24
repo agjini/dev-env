@@ -2,6 +2,7 @@
 - apt_key:
     url: "https://dl.yarnpkg.com/debian/pubkey.gpg"
     state: present
+  become: yes
 
 #clean
 - file: path=/etc/apt/sources.list.d/yarn.list state=absent
@@ -11,6 +12,7 @@
     state: present
     filename: 'yarnpkg'
     update_cache: yes
+  become: yes
 
 - apt: 
     name: yarn
