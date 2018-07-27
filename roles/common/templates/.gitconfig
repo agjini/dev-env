@@ -3,10 +3,11 @@
     ui = true
 [alias]
     last = cat-file commit HEAD
-    cm = commit -a -m\"[refactor] code mort\"
-    format = commit -a -m\"[refactor] format\"
-    rename = commit -a -m\"[refactor] renommage\"
-    duplication = commit -a -m\"[refactor] code mort : duplication\"
+    cm = commit -a -m\"refactor(): dead code\"
+    ca = commit -a -m
+    format = commit -a -m\"refactor(): format\"
+    rename = commit -a -m\"refactor(): rename\"
+    duplication = commit -a -m\"refactor(): remove duplication\"
     st = status -s
     co = checkout
     ci = commit
