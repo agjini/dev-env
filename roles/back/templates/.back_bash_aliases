@@ -165,6 +165,17 @@ function wisdom-dev-update_all {
     # TODO check if service and client of same service is there.
 }
 
+#################################
+############ ELK ################
+#################################
+
+function es_start {
+    docker run -p 9200:9200 -p 9300:9300 --name es -v ~/applications/esdata:/usr/share/elasticsearch/data -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.3.2
+}
+
+function es_stop {
+    docker rm -f es
+}
 
 #################################
 ############# NEO4J #############
@@ -175,8 +186,7 @@ function neo4j_start {
 }
 
 function neo4j_stop {
-	docker stop neo4j
-	docker rm neo4j
+	docker rm -f neo4j
 }
 
 function neo4j_dump_on_local {
