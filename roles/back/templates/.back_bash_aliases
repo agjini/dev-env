@@ -170,7 +170,7 @@ function wisdom-dev-update_all {
 #################################
 
 function es_start {
-    docker run -p 9200:9200 -p 9300:9300 --name es -v ~/applications/esdata:/usr/share/elasticsearch/data -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.3.2
+    docker run -d --name es -p 9200:9200 -p 9300:9300 -v ~/applications/esdata:/usr/share/elasticsearch/data -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.3.2
 }
 
 function es_stop {
