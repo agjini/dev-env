@@ -170,7 +170,7 @@ function wisdom-dev-update_all {
 #################################
 
 function es_start {
-    docker run -d --name es -p 9200:9200 -p 9300:9300 -v ~/applications/esdata:/usr/share/elasticsearch/data -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.3.2
+    docker run -d --name es -p 9200:9200 -p 9300:9300 -v ~/applications/esdata:/usr/share/elasticsearch/data -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.3.2 || docker start es
 }
 
 function es_stop {
@@ -189,7 +189,7 @@ function es_purge {
 #################################
 
 function neo4j_start {
-	docker run -d --name neo4j -p 7474:7474 -v ~/applications/neo4j/data:/data registry.liveaction.com/neo4j:latest
+	docker run -d --name neo4j -p 7474:7474 -v ~/applications/neo4j/data:/data registry.liveaction.com/neo4j:latest || docker start neo4j
 }
 
 function neo4j_stop {
