@@ -1,10 +1,10 @@
 
-- name: Install java {{ oracle_jdk_version }}
+- name: Install {{ oracle_jdk }}
   get_url:
     url: "{{ oracle_jdk_url }}"
     dest: ~/applications/jdk.tar.gz
     headers: 'Cookie:oraclelicense=accept-securebackup-cookie'
 - command: tar xvfz ~/applications/jdk.tar.gz -C ~/applications
   args:
-    creates: ~/applications/jdk-{{ oracle_jdk_version }}
-- file: src=~/applications/jdk-{{ oracle_jdk_version }} dest=~/applications/jdk state=link
+    creates: ~/applications/{{ oracle_jdk }}
+- file: src=~/applications/{{ oracle_jdk }} dest=~/applications/jdk state=link
