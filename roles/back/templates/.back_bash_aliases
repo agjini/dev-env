@@ -65,7 +65,6 @@ function wisdom-dev-update {
     for proj in $@; do
        baseappdir="${HOME}/workspace/longback/${proj}/${proj}-longd-application"
        appdir="${baseappdir}/target/longd-app"
-       ls ${appdir}
        if [ ! -d "${baseappdir}" ]; then
            echo "longd-app not found at ${appdir}, trying the old way..."
            baseappdir="${HOME}/workspace/longback/${proj}/${proj}-wisdom-application"
