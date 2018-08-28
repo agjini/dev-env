@@ -188,7 +188,8 @@ function es_purge {
 #################################
 
 function neo4j_start {
-	docker run -d --name neo4j -p 7474:7474 -v ~/applications/neo4j/data:/data registry.liveaction.com/neo4j:latest || docker start neo4j
+    mkdir -p ~/applications/neo4j/data
+    docker run -d --name neo4j -p 7474:7474 -v ~/applications/neo4j/data:/data registry.liveaction.com/neo4j:latest || docker start neo4j
 }
 
 function neo4j_stop {
@@ -228,7 +229,7 @@ function neo4j_dump_nightly_on_local {
 
 function neo4j_purge {
     neo4j_stop
-    sudo rm -rf ~/applications/neo4j
+    rm -rf ~/applications/neo4j
     mkdir -p ~/applications/neo4j/data
     neo4j_start
 }
