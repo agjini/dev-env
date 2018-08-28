@@ -1,23 +1,23 @@
 
 # Git user information
-email: augustin.gjini@gmail.com
-username: Augustin Gjini
+email: "augustin.gjini@gmail.com"
+username: "Augustin Gjini"
 
 # Java version
-oracle_jdk: jdk1.8.0_181
-oracle_jdk_url: http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-linux-x64.tar.gz
-# oracle_jdk: jdk-10.0.2
-# oracle_jdk_url: http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/jdk-10.0.2_linux-x64_bin.tar.gz
+oracle_jdk: "jdk1.8.0_181"
+oracle_jdk_url: "http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-linux-x64.tar.gz"
+# oracle_jdk: "jdk-10.0.2"
+# oracle_jdk_url: "http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/jdk-10.0.2_linux-x64_bin.tar.gz"
 
-gradle_version: 4.10
-maven_version: 3.5.4
+gradle_version: "4.10"
+maven_version: "3.5.4"
 
 # Docker compose
-dc_version: 1.22.0
+dc_version: "1.22.0"
 
 # Node js
-node_previous_version: 8.9.4
-node_version: 10.2.1
+node_previous_version: "8.9.4"
+node_version: "10.2.1"
 
 # A nexus repository (to be used in maven settings.xml)
-nexus_repository: nexus.livingobjects.com
+nexus_repository: "nexus.livingobjects.com"
