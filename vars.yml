@@ -9,7 +9,7 @@ oracle_jdk_url: http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442f
 # oracle_jdk: jdk-10.0.2
 # oracle_jdk_url: http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/jdk-10.0.2_linux-x64_bin.tar.gz
 
-gradle_version: 4.9
+gradle_version: 4.10
 maven_version: 3.5.4
 
 # Docker compose
