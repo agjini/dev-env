@@ -189,7 +189,17 @@ function es_purge {
 
 function neo4j_start {
     mkdir -p ~/applications/neo4j/data
-    docker run -d --name neo4j -p 7474:7474 -v ~/applications/neo4j/data:/data registry.liveaction.com/neo4j:latest || docker start neo4j
+    docker run -d --name neo4j \
+        -e NEO4J_dbms_jvm_additional="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005" \
+        -e NEO4J_dbms_allow__upgrade=true \
+        -e NEO4J_AUTH=none \
+        -e NEO4J_dbms_unmanaged__extension__classes=com.livingobjects.neo4j=/unmanaged \
+        -p 7474:7474 \
+        -p 7687:7687 \
+        -p 5008:5005 \
+        -v ~/applications/neo4j/data:/data \
+        -v ~/applications/neo4j/plugins:/plugins \
+        neo4j:3.4.6 || docker start neo4j
 }
 
 function neo4j_stop {
@@ -214,7 +224,7 @@ function neo4j_dump_on_local {
     scp ${IP}:~/graph.tar.gz /tmp
 
     mkdir -p ~/applications/neo4j/data
-    tar xvzf /tmp/graph.tar.gz -C ~/applications/neo4j/data/
+    tar xvzf /tmp/graph.tar.gz -C ~/applications/neo4j/data/databases
 
     neo4j_start
 }
