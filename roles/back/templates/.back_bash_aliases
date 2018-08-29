@@ -223,7 +223,7 @@ function neo4j_dump_on_local {
 
     scp ${IP}:~/graph.tar.gz /tmp
 
-    mkdir -p ~/applications/neo4j/data
+    mkdir -p ~/applications/neo4j/data/databases
     tar xvzf /tmp/graph.tar.gz -C ~/applications/neo4j/data/databases
 
     neo4j_start
