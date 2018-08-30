@@ -19,8 +19,8 @@ alias q='~/applications/q'
 alias test_and_push='mvn clean install && git push'
 alias dc=docker-compose
 
-alias hotfix="git co develop && git pull && git co master && git pull && git remote prune origin && mvn jgitflow:hotfix-start"
-alias release="git co develop && git pull && git co master && git pull && git remote prune origin && mvn jgitflow:release-start"
+alias hotfix="git co develop && git pull && git co master && git pull && git remote prune origin && mvn gitflow:hotfix-start"
+alias release="git co develop && git pull && git co master && git pull && git remote prune origin && mvn gitflow:release-start"
 
 LO_OSS_JAVA_PROJECTS="lo-oss/primeval-commons lo-oss/primeval-codex lo-oss/aspecio lo-oss/ninio lo-oss/saga lo-oss/neo4j-lo-extensions lo-oss/bndploy"
 
@@ -288,6 +288,18 @@ function neo4j_delete_last_version {
 ############# MYSQL #############
 #################################
 
+function mysql_start {
+    mkdir -p ~/applications/mysql/data
+    docker run -d --name mysql \
+        -e MYSQL_ROOT_PASSWORD=root
+        -p 3306:3306 \
+        -v ~/applications/mysql/data:/data \
+        mysql:latest || docker start mysql
+}
+
+function mysql_stop {
+	docker rm -f mysql
+}
 
 function _mysql_dump_on_local {
     if [ $# -lt 2 ]; then
@@ -296,9 +308,9 @@ function _mysql_dump_on_local {
     fi
     local HOST=${1}
     local DATABASE=${2}
-    local path_for_dump=/tmp/dump_itg_${DATABASE}.sql
-    mysqldump -h ${HOST} -u longback -plongback ${DATABASE} > ${path_for_dump}
-    mysql -h localhost -uroot -proot ${DATABASE} < ${path_for_dump}
+    local path_for_dump=/dump/dump_itg_${DATABASE}.sql
+    docker exec -ti mysql mysqldump -h ${HOST} -u longback -plongback ${DATABASE} > ${path_for_dump}
+    docker exec -ti mysql mysql -h localhost -uroot -proot ${DATABASE} < ${path_for_dump}
 }
 function mysql_dump_itg_on_local {
     _mysql_dump_on_local 172.17.10.81 $*
