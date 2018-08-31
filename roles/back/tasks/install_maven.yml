@@ -7,5 +7,9 @@
     creates: ~/applications/apache-maven-{{ maven_version }}
 - file: src=~/applications/apache-maven-{{ maven_version }} dest=~/applications/maven state=link
 
+- get_url:
+    url: https://raw.github.com/dimaj/maven-bash-completion/master/bash_completion.bash
+    dest: ~/.maven_bash_completion.bash
+
 - file: path=~/.m2 state=directory
 - template: src=templates/settings.xml dest=~/.m2/settings.xml

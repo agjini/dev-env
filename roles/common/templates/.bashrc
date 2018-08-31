@@ -121,4 +121,8 @@ function tmux {
 if [ -f ~/.bash_perso ]; then
     . ~/.bash_perso
 fi
+
+# Load all custom bach script (useful for later completion)
+source ~/.*.bash
+
 #{{ ansible_managed }}
