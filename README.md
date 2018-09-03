@@ -19,8 +19,16 @@ To add support for other systems (such as Redhat). Search for debian parts of th
 
 The tool is based on ansible. Which allow to be launched several time without doing all tasks that have been already done.
 
+Ubuntu :
+
 ```bash
 sudo apt install ansible
+```
+
+Mac :
+
+```bash
+brew install ansible
 ```
 
 ## Install

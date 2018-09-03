@@ -4,7 +4,7 @@
 - hosts: localhost
   roles:
      - common
-     - back
-     - front
+     #- back
+     #- front
   vars_files:
     - vars.yml
