@@ -17,7 +17,6 @@ alias alais='alias'
 alias gitrepos_update_all='~/bin/git-repos-update-all.sh'
 
 alias ack='ack-grep'
-alias tkillw='command tmux kill-window -t $1'
 
 alias gitbranchpurge='git fetch -p && git branch --merged | grep -v "\*" | grep -v "master" | grep -v "develop" | xargs -n 1 git branch -d'
 
@@ -84,6 +83,10 @@ export -f gitrepos_status_path  &>/dev/null
 
 function gitrepos_status_all {
    find -L ~/ -maxdepth 5 -path "*.git"  -type d  -exec bash -c 'gitrepos_status_path "{}"' \;
+}
+
+function tkillw {
+    tmux kill-window -t $1
 }
 
 function tkillws {
