@@ -1,11 +1,7 @@
 # Things that can be added
 
-- install fzf
-(added to bash rc)
-
-Does it take in account .gitignore ?
-
 - add ESC biding to CAPS LOCK (back role)
+dconf write /org/gnome/desktop/input-sources/xkb-options "['caps:escape']"
 
 - maybe speed up key repetition ?
 
@@ -13,7 +9,6 @@ Does it take in account .gitignore ?
 
 ## Improves
 
-- Fix tkillw alias problem
 - Make vars.yml ignorable to git. Use `vars_example.yml` in git.
 - Allow to configure roles
 
