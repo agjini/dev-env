@@ -105,6 +105,13 @@ if [ -f ~/.ssh_aliases ]; then
     . ~/.ssh_aliases
 fi
 
+# At last, allows user to customize its environment
+if [ -f ~/.bash_perso ]; then
+    . ~/.bash_perso
+fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 function tmux {
     if (( $# )); then
         command tmux "${@}"
@@ -117,12 +124,7 @@ function tmux {
     fi
 }
 
-# At last, allows user to customize its environment
-if [ -f ~/.bash_perso ]; then
-    . ~/.bash_perso
-fi
-
-# Load all custom bach script (useful for later completion)
-source ~/.*.bash
+# Load all custom bach script (fzf, useful for later completion)
+[ -f ~/*.bash ] && source ~/*.bash
 
 #{{ ansible_managed }}
