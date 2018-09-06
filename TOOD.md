@@ -13,6 +13,7 @@ Does it take in account .gitignore ?
 
 ## Improves
 
+- Fix tkillw alias problem
 - Make vars.yml ignorable to git. Use `vars_example.yml` in git.
 - Allow to configure roles
 
