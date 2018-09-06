@@ -17,7 +17,7 @@ alias alais='alias'
 alias gitrepos_update_all='~/bin/git-repos-update-all.sh'
 
 alias ack='ack-grep'
-alias tkillw='tmux kill-window -t $1'
+alias tkillw='command tmux kill-window -t $1'
 
 alias gitbranchpurge='git fetch -p && git branch --merged | grep -v "\*" | grep -v "master" | grep -v "develop" | xargs -n 1 git branch -d'
 
@@ -90,7 +90,7 @@ function tkillws {
     for i in $(eval echo {$1..$2});
     do
         echo "kill $i";
-        tmux kill-window -t ${i};
+        command tmux kill-window -t ${i};
     done
 }
 

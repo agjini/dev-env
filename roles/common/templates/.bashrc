@@ -101,16 +101,10 @@ if [ -f ~/.back_bash_aliases ]; then
     . ~/.back_bash_aliases
 fi
 
-if [ -f ~/.ssh_aliases ]; then
-    . ~/.ssh_aliases
+# Load all custom bash scripts : fzf, maven bash completion, ... (useful for later completion)
+if ls ~/.*.bash 1> /dev/null 2>&1; then
+    source ~/.*.bash
 fi
-
-# At last, allows user to customize its environment
-if [ -f ~/.bash_perso ]; then
-    . ~/.bash_perso
-fi
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 function tmux {
     if (( $# )); then
@@ -123,8 +117,5 @@ function tmux {
         fi
     fi
 }
-
-# Load all custom bach script (fzf, useful for later completion)
-[ -f ~/*.bash ] && source ~/*.bash
 
 #{{ ansible_managed }}
