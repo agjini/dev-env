@@ -199,7 +199,7 @@ function neo4j_start {
         -p 5008:5005 \
         -v ~/applications/neo4j/data:/data \
         -v ~/applications/neo4j/plugins:/plugins \
-        neo4j:3.4.6 || docker start neo4j
+        neo4j:3.4.7 || docker start neo4j
 }
 
 function neo4j_stop {
