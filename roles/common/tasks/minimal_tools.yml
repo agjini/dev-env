@@ -1,8 +1,9 @@
 
-# git-lfs (large file system)
-- shell: curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
-  args:
-    warn: no
+- name: Install fzf
+  git:
+    repo: https://github.com/junegunn/fzf.git
+    dest: ~/.fzf
+- shell: ~/.fzf/install
 
 - name: Add docker apt-key
   apt_key:
@@ -24,12 +25,12 @@
   - build-essential
   - tmux
   - httpie
-  - git-lfs
   - jq
   - git-flow
   - docker-ce
   - unzip
   - vim
+  - silversearcher-ag
   become: yes
 
 - name: Allow docker for non root
@@ -37,9 +38,6 @@
   become: yes
 - user: name={{ansible_user}} groups=docker append=yes
   become: yes
-
-- name: Install git-lfs
-  shell: git lfs install
 
 - name: Install docker-compose
   get_url:

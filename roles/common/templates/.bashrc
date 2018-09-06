@@ -106,6 +106,9 @@ if ls ~/.*.bash 1> /dev/null 2>&1; then
     source ~/.*.bash
 fi
 
+export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
 function tmux {
     if (( $# )); then
         command tmux "${@}"
