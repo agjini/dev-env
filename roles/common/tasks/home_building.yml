@@ -5,7 +5,6 @@
 - template: src=templates/.gitconfig dest=~/.gitconfig
 - template: src=templates/.tmux.conf dest=~/.tmux.conf
 - template: src=templates/.bashrc dest=~/.bashrc mode=0755
-- template: src=templates/.bash_profile dest=~/.bash_profile mode=0755
 - template: src=templates/.bash_aliases dest=~/.bash_aliases mode=0755
 - template: src=templates/.ssh/config dest=~/.ssh/config
 
