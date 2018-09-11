@@ -291,10 +291,10 @@ function neo4j_delete_last_version {
 function mysql_start {
     mkdir -p ~/applications/mysql/data
     docker run -d --name mysql \
-        -e MYSQL_ROOT_PASSWORD=root
+        -e MYSQL_ROOT_PASSWORD=root \
         -p 3306:3306 \
         -v ~/applications/mysql/data:/data \
-        mysql:latest || docker start mysql
+        mysql:5.6 || docker start mysql
 }
 
 function mysql_stop {
@@ -308,9 +308,9 @@ function _mysql_dump_on_local {
     fi
     local HOST=${1}
     local DATABASE=${2}
-    local path_for_dump=/dump/dump_itg_${DATABASE}.sql
-    docker exec -ti mysql mysqldump -h ${HOST} -u longback -plongback ${DATABASE} > ${path_for_dump}
-    docker exec -ti mysql mysql -h localhost -uroot -proot ${DATABASE} < ${path_for_dump}
+    local path_for_dump=/tmp/dump_itg_${DATABASE}.sql
+    docker exec mysql mysqldump -h ${HOST} -u longback -plongback ${DATABASE} > ${path_for_dump}
+    docker exec mysql mysql -h localhost -uroot -proot ${DATABASE} < ${path_for_dump}
 }
 function mysql_dump_itg_on_local {
     _mysql_dump_on_local 172.17.10.81 $*
@@ -318,8 +318,8 @@ function mysql_dump_itg_on_local {
 function _mysql_dump_on_local_all {
     local HOST=${1}
     local PATH_FOR_DUMP=${2}
-    mysqldump -h${HOST} -ulongback -plongback --databases `mysql -h${HOST} -ulongback -plongback --skip-column-names -e "SELECT GROUP_CONCAT(schema_name SEPARATOR ' ') FROM information_schema.schemata WHERE schema_name NOT IN ('mysql','performance_schema','information_schema');"` > ${PATH_FOR_DUMP}
-    mysql -h localhost -uroot -proot ${DATABASE} < ${PATH_FOR_DUMP}
+    docker exec -i mysql mysqldump -h${HOST} -ulongback -plongback --databases `docker exec mysql mysql -h${HOST} -ulongback -plongback --skip-column-names -e "SELECT GROUP_CONCAT(schema_name SEPARATOR ' ') FROM information_schema.schemata WHERE schema_name NOT IN ('mysql','performance_schema','information_schema');"` > ${PATH_FOR_DUMP}
+    docker exec -i mysql mysql -h localhost -uroot -proot ${DATABASE} < ${PATH_FOR_DUMP}
 }
 
 function mysql_dump_itg_on_local_all {
