@@ -239,7 +239,7 @@ function neo4j_dump_nightly_on_local {
 
 function neo4j_purge {
     neo4j_stop
-    sudo rm -rf ~/applications/neo4j
+    sudo rm -rf ~/applications/neo4j/data
     mkdir -p ~/applications/neo4j/data
     neo4j_start
 }
