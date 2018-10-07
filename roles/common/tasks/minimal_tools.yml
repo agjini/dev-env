@@ -29,7 +29,7 @@
   - git-flow
   - docker-ce
   - unzip
-  - vim
+  - vim-gtk
   - silversearcher-ag
   become: yes
 
