@@ -101,9 +101,8 @@ if [ -f ~/.back_bash_aliases ]; then
     . ~/.back_bash_aliases
 fi
 
-# Load all custom bash scripts : fzf, maven bash completion, ... (useful for later completion)
-if ls ~/.*.bash 1> /dev/null 2>&1; then
-    source ~/.*.bash
+if [ -f ~/.maven_bash_completion.bash ]; then
+    . ~/.maven_bash_completion.bash
 fi
 
 export FZF_DEFAULT_COMMAND='ag -g ""'

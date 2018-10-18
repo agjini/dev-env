@@ -10,6 +10,7 @@ dconf write /org/gnome/desktop/input-sources/xkb-options "['caps:escape']"
 - vim
 	- colorscheme
 	- .vimrc
+- Fix docker conflict with 172.17.* subnet
 
 ## Improves
 
