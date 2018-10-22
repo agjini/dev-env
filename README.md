@@ -30,6 +30,7 @@ sudo apt install ansible
 Fills the variables in vars.yml
 
 ```bash
+cp vars_example.yml vars.yml
 vi vars.yml
 ```
 
