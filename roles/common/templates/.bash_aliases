@@ -15,6 +15,7 @@ alias ..=' cd ..'
 alias gti='git'
 alias alais='alias'
 alias gitrepos_update_all='~/bin/git-repos-update-all.sh'
+alias gitrepos_checkout_all='~/bin/git-repos-checkout-all.sh'
 
 alias ack='ack-grep'
 
