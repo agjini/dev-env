@@ -7,7 +7,7 @@
 - template: src=templates/.bashrc dest=~/.bashrc mode=0755
 - template: src=templates/.bash_aliases dest=~/.bash_aliases mode=0755
 - template: src=templates/.ssh/config dest=~/.ssh/config
-- template: src=template/git-repos-checkout-all.sh dest=~/bin/git-repos-checkout-all.sh mode=0755
+- template: src=templates/git-repos-checkout-all.sh dest=~/bin/git-repos-checkout-all.sh mode=0755
 
 - git:
     repo: https://github.com/magicmonty/bash-git-prompt.git
