@@ -341,6 +341,10 @@ function mysql_dump_prod_on_local_all {
 ############# MISC #############
 #################################
 
+function debug {
+    set -x && $* && set +x
+}
+
 function untilfailure {
     i=0
     RETURN_VALUE=0
@@ -378,7 +382,7 @@ function doormanToken {
 }
 
 function doormanTokenItg {
-   _doormanToken 172.17.10.81/service back admin
+   _doormanToken turbot/service/bach admin admin
 }
 
 function doormanTokenNightly {
