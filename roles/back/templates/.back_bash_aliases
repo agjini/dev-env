@@ -385,6 +385,10 @@ function doormanTokenItg {
    _doormanToken turbot/service/bach admin admin
 }
 
+function doormanTokenTanche {
+   _doormanToken tanche/service/bach admin admin
+}
+
 function doormanTokenNightly {
    _doormanToken 172.17.10.215/service back admin
 }
