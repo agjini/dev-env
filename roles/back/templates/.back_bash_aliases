@@ -187,6 +187,35 @@ function es_purge {
 ############# NEO4J #############
 #################################
 
+# ln -s neo4j-community-2.3.12 neo4j
+
+alias neo4j_2_start='~/applications/neo4j2/bin/neo4j start'
+
+alias neo4j_2_stop='~/applications/neo4j2/bin/neo4j stop'
+
+function neo4j_2_dump_on_local {
+    if [ $# -lt 1 ]; then
+        echo -e USAGE: neo4j_2_dump_on_local ip
+        return
+    fi
+
+    local IP=${1}
+
+    ssh ${IP} 'rm -f graph.tar.gz'
+    ssh ${IP} 'cd /data/neo4j/ && tar cvfpz ~/graph.tar.gz graph.db'
+
+    neo4j_2_stop
+
+    rm -rf ~/applications/neo4j2/data/*
+
+    scp ${IP}:~/graph.tar.gz /tmp
+
+    mkdir -p ~/applications/neo4j2/data
+    tar xvzf /tmp/graph.tar.gz -C ~/applications/neo4j2/data
+
+    neo4j_2_start
+}
+
 function neo4j_start {
     mkdir -p ~/applications/neo4j/data
     docker run -d --name neo4j \
