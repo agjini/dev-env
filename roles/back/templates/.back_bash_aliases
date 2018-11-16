@@ -560,6 +560,12 @@ function longback-un-hotfix-finish {
         return 1
     fi
 
+    if [ !`git branch --list hotfix/${version}` ]
+    then
+        echo branch hotfix/${version} does not exist
+        return 1
+    fi
+
     version=${1}
 
     git co master;
