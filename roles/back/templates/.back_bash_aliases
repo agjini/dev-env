@@ -554,6 +554,31 @@ function dockerscp {
     ssh $dst "rm $fileName";
 }
 
+function longback-un-hotfix-finish {
+    if [[ $# -lt 1 ]]; then
+        echo "Usage : version (4.6.2)"
+        return 1
+    fi
+
+    version=${1}
+
+    git co master;
+    git merge hotfix/${version};
+    git tag ${version};
+    git push;
+    mvn clean deploy;
+    git co develop;
+    git merge master --strategy-option ours;
+    git push;
+    git branch -d hotfix/${version};
+
+    if [ `git branch -r --list origin/hotfix/${version}` ]
+    then
+        git push origin :hotfix/${version};
+    fi
+
+}
+
 #################################
 ########### FARCASTER ###########
 #################################
