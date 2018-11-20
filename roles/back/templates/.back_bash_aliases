@@ -575,7 +575,7 @@ function longback-un-hotfix-finish {
     git push origin ${version}
     mvn clean deploy;
     git co develop;
-    git merge master --strategy-option ours;
+    git merge master --no-edit --strategy-option ours;
     git push;
     git branch -d hotfix/${version};
 
