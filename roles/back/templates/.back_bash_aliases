@@ -555,6 +555,7 @@ function dockerscp {
 }
 
 function longback-un-hotfix-finish {
+    set -o errtrace
     if [[ $# -lt 1 ]]; then
         echo "Usage : version (4.6.2)"
         return 1
@@ -569,7 +570,7 @@ function longback-un-hotfix-finish {
 
 
     git co master;
-    git merge hotfix/${version};
+    git merge --no-edit hotfix/${version};
     git push;
     git tag ${version};
     git push origin ${version}
