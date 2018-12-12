@@ -586,6 +586,29 @@ function longback-un-hotfix-finish {
 
 }
 
+function deploy-extra-jar {
+    if [[ $# -lt 1 ]]; then
+        echo "Usage : deploy-extra-jar <jarFile> [<remote_platform>] [<container>]"
+        echo "By default deploy on turbot bach container"
+        return 1
+    fi
+
+    jarFile=${1}
+    remote_platform=${2:-turbot}
+    container=${3:-bach}
+
+    echo "scp ${jarFile} ${remote_platform}:/data/jar/${container}"
+    scp ${jarFile} ${remote_platform}:/data/jar/${container}
+}
+
+function clear-extra-jars {
+    remote_platform=${1:-turbot}
+    container=${2:-bach}
+
+    echo "ssh ${remote_platform} rm /data/jar/${container}/*.jar"
+    ssh ${remote_platform} rm /data/jar/${container}/*.jar
+}
+
 #################################
 ########### FARCASTER ###########
 #################################
