@@ -19,6 +19,7 @@
     pretty-log = log --oneline --date-order --graph --all --decorate
     topo-log = log --oneline --graph --all --decorate
     t = log --oneline --graph --all --decorate --pretty=tformat:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%an %cr)%Creset' -15
+    tt = log --oneline --graph --all --decorate --pretty=tformat:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%an %cr)%Creset'
     diff = diff -p --stat
     standup = log --since yesterday --oneline --author {{email}}
     lg = log --graph --pretty=tformat:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
