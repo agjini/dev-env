@@ -467,6 +467,22 @@ function deploy {
     ~/workspace/deploy/docker-deploy/build_and_deploy.sh ${ENVIRONMENT} ${MODULE_NAME} ${VERSION}
 }
 
+function deploy-multiple-extra-jar {
+    if [[ $# -lt 2 ]]; then
+        echo "Usage : deploy-multiple-extra-jar <remote_platform> <container> [<jarFile> ...] "
+        return 1
+    fi
+
+    remote_platform=${1}
+    container=${2}
+    shift
+    shift
+    for jar in "$@"
+    do
+        deploy-extra-jar $jar $remote_platform $container
+    done
+}
+
 alias deploy_integration='deploy lo-itg'
 alias jenkins_release='java -jar ~/applications/jenkins-cli.jar -s http://172.17.10.81:8080/ build `basename ${PWD}-RELEASE` -s'
 function tkillws {
