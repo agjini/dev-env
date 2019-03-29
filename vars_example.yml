@@ -20,4 +20,4 @@ node_previous_version: "8.9.4"
 node_version: "10.2.1"
 
 # A nexus repository (to be used in maven settings.xml)
-nexus_repository: "https://nexus.livingobjects.com/repository/public/"
+nexus_repository: "https://nexus.liveaction.com/repository/public/"
