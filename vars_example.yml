@@ -4,7 +4,7 @@ email: "augustin.gjini@gmail.com"
 username: "Augustin Gjini"
 
 # Java version
-jdk: "jdk1.8.0_181"
+jdk: "java-se-8u40-ri"
 jdk_url: "https://download.java.net/openjdk/jdk8u40/ri/jdk_ri-8u40-b25-linux-x64-10_feb_2015.tar.gz"
 # oracle_jdk: "jdk-10.0.2"
 # oracle_jdk_url: "http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/jdk-10.0.2_linux-x64_bin.tar.gz"
