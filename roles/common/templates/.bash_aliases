@@ -32,7 +32,7 @@ function clone_group {
     GROUP=${2};
     mkdir -p ${GROUP};
     cd ${GROUP};
-    for PROJECT in `http https://git.livingobjects.com:443/api/v3/groups/${GROUP}?private_token=${TOKEN} | jq .projects | jq -r .[].ssh_url_to_repo`;
+    for PROJECT in `http https://git.livingobjects.com:443/api/v4/groups/${GROUP}?private_token=${TOKEN} | jq .projects | jq -r .[].ssh_url_to_repo`;
     do
         echo Cloning ${PROJECT};
         git clone ${PROJECT};
