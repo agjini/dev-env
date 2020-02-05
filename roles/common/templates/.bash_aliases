@@ -21,7 +21,7 @@ alias ack='ack-grep'
 
 alias gitbranchpurge='git fetch -p && git branch --merged | grep -v "\*" | grep -v "master" | grep -v "develop" | xargs -n 1 git branch -d'
 
-alias gsubs='git pull && git submodule sync --recursive && git submodule update --init --recursive'
+alias gsubs='git pull && git submodule sync --recursive && git submodule update --init --recursive --jobs 8'
 
 function clone_group {
     if [ $# -ne 2 ]
