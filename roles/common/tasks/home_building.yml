@@ -5,7 +5,7 @@
 - template: src=templates/.gitconfig dest=~/.gitconfig
 - template: src=templates/.tmux.conf dest=~/.tmux.conf
 - template: src=templates/.bashrc dest=~/.bashrc mode=0755
-- template: src=templates/.bash_aliases dest=~/.bash_aliases mode=0755
+- template: src=templates/.common_bash_aliases dest=~/.common_bash_aliases mode=0755
 - template: src=templates/.ssh/config dest=~/.ssh/config
 - template: src=templates/git-repos-checkout-all.sh dest=~/bin/git-repos-checkout-all.sh mode=0755
 

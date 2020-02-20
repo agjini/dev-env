@@ -97,6 +97,10 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+if [ -f ~/.common_bash_aliases ]; then
+    . ~/.common_bash_aliases
+fi
+
 if [ -f ~/.back_bash_aliases ]; then
     . ~/.back_bash_aliases
 fi
