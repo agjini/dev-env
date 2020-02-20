@@ -4,8 +4,8 @@ email: "augustin.gjini@gmail.com"
 username: "Augustin Gjini"
 
 # Java version
-oracle_jdk: "jdk1.8.0_191"
-oracle_jdk_url: "https://download.oracle.com/otn-pub/java/jdk/8u191-b12/2787e4a523244c269598db4e85c51e0c/jdk-8u191-linux-x64.tar.gz"
+jdk: "java-se-8u40-ri"
+jdk_url: "https://download.java.net/openjdk/jdk8u40/ri/jdk_ri-8u40-b25-linux-x64-10_feb_2015.tar.gz"
 # oracle_jdk: "jdk-10.0.2"
 # oracle_jdk_url: "http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/jdk-10.0.2_linux-x64_bin.tar.gz"
 
@@ -20,4 +20,4 @@ node_previous_version: "8.9.4"
 node_version: "10.2.1"
 
 # A nexus repository (to be used in maven settings.xml)
-nexus_repository: "https://nexus.livingobjects.com/repository/public/"
+nexus_repository: "https://nexus.liveaction.com/repository/public/"

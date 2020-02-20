@@ -21,6 +21,8 @@ alias ack='ack-grep'
 
 alias gitbranchpurge='git fetch -p && git branch --merged | grep -v "\*" | grep -v "master" | grep -v "develop" | xargs -n 1 git branch -d'
 
+alias gsubs='git pull && git submodule sync --recursive && git submodule update --init --recursive --jobs 8'
+
 function clone_group {
     if [ $# -ne 2 ]
     then
@@ -32,7 +34,7 @@ function clone_group {
     GROUP=${2};
     mkdir -p ${GROUP};
     cd ${GROUP};
-    for PROJECT in `http https://git.livingobjects.com:443/api/v3/groups/${GROUP}?private_token=${TOKEN} | jq .projects | jq -r .[].ssh_url_to_repo`;
+    for PROJECT in `http https://git.livingobjects.com:443/api/v4/groups/${GROUP}?private_token=${TOKEN} | jq .projects | jq -r .[].ssh_url_to_repo`;
     do
         echo Cloning ${PROJECT};
         git clone ${PROJECT};
