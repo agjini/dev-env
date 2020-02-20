@@ -1,9 +1,9 @@
 
 - name: Build home
   import_tasks: home_building.yml
-
-- name: Install java
-  import_tasks: install_java.yml
+#
+#- name: Install java
+#  import_tasks: install_java.yml
 
 - name: Install gradle
   import_tasks: install_gradle.yml
