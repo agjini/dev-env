@@ -2,10 +2,9 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-#/ Usage:       git-repos-checkout-all.sh
+#/ Usage:       git-repos-update-all.sh
 #/ Version:     2.0
-#/ Description: Find all git repository from `~/` and checkout them in multi-thread mode.
-#/ Args: branch to checkout on all repos
+#/ Description: Find all git repository from `~/` and update them in multi-thread mode.
 #/ Options:
 #/   --help:     Display this help message
 function usage() { grep '^#/' "$0" | cut -c4- ; exit 0 ; }
@@ -35,7 +34,7 @@ log() {
   ) 200>"/var/lock/.$(basename "$0").lock"
 }
 log_dirty(){ log "$PF_JAUNE" "$@" "DIRTY"; }
-log_updated(){ log "$PF_VERT" "$@" "CHECKOUT OK"; }
+log_updated(){ log "$PF_VERT" "$@" "UPDATED"; }
 log_uptodate(){ log "$PF_VERT" "$@" "UP-TO-DATE"; }
 log_error(){
   ( flock -n 200
@@ -46,25 +45,25 @@ log_error(){
   ) 200>"/var/lock/.$(basename "$0").lock"
 }
 
-_checkout_git_repo() {
+_update_git_repo() {
   local LANG=en_US
   local gitdir=$1
-  local branch=$2
   readonly GIT="git --git-dir=$gitdir --work-tree=$(dirname "$gitdir")"
   local CURRENT_REPO; CURRENT_REPO=$($GIT config --get remote.origin.url 2>/dev/null)
   local CURRENT_BRANCH; CURRENT_BRANCH=$($GIT symbolic-ref -q --short HEAD 2>/dev/null || $GIT describe --tags --exact-match 2>/dev/null)
-  
-  if [ "$branch" = "$CURRENT_BRANCH" ]; then
-    log_uptodate "$CURRENT_REPO"
-    return
-  fi
+
   if [[ ! -z $($GIT status --porcelain 2>/dev/null) ]]; then
     log_dirty "$CURRENT_REPO" "$CURRENT_BRANCH"
     return
   fi
 
-  if OUTPUT=$($GIT checkout $branch 2>&1); then
-    log_updated "$CURRENT_REPO" "$branch"
+  if ! $GIT fetch -v --dry-run 2>&1 | grep -Eq "^ = \[up.to.date\] +${CURRENT_BRANCH} "; then
+    if OUTPUT=$($GIT pull 2>&1); then
+      log_updated "$CURRENT_REPO" "$CURRENT_BRANCH"
+    else
+      log_error "$CURRENT_REPO" "$CURRENT_BRANCH" "ERROR" "--> ${OUTPUT}"
+      printf "\t* %s\n" "$gitdir" >"$fifo" &
+    fi
   fi
 }
 
@@ -91,17 +90,13 @@ _cleanup() {
 
 if [[ "${BASH_SOURCE[0]}" = "$0" ]]; then
   readonly START_TIME=$(date +%s%3N)
-  if [ -z "$1" ]; then
-    echo "Need new branch value" >&2; exit 1;
-  else	  
-    NEW_BRANCH=$1
-  fi
+
   export fifo; fifo=$(mktemp -u)
   mkfifo "$fifo"
   echo "" > "$fifo"& # to avoid block the read at the end
   trap '_cleanup "$fifo"' INT TERM EXIT
 
-  export -f _checkout_git_repo
+  export -f _update_git_repo
   export -f log
   export -f log_dirty
   export -f log_error
@@ -109,9 +104,9 @@ if [[ "${BASH_SOURCE[0]}" = "$0" ]]; then
   export -f log_uptodate
 
   # Find git repos
-  find -L ~/workspace -maxdepth 5 -path "*.git" -not -path "*zprezto*" -type d -print0 2> /dev/null | xargs --null --max-proc=$MAX_PROC -n 1 -I {} bash -c "_checkout_git_repo {} $NEW_BRANCH" || true
+  find -L ~/workspace -maxdepth 5 -path "*.git" -not -path "*zprezto*" -type d -print0 2> /dev/null | xargs --null --max-proc=$MAX_PROC -n 1 -I {} bash -c "_update_git_repo {}" || true
   # Find livesp submodules
-  find -L ~/workspace/livesp -maxdepth 8 -path "*.git" -not -path "*zprezto*" -type f -print0 2> /dev/null | xargs --null --max-proc=$MAX_PROC -n 1 -I {} bash -c "_checkout_git_repo {} $NEW_BRANCH" || true
+  find -L ~/workspace/livesp -maxdepth 8 -path "*.git" -not -path "*zprezto*" -type f -print0 2> /dev/null | xargs --null --max-proc=$MAX_PROC -n 1 -I {} bash -c "_update_git_repo {}" || true
 
   _display_result "$START_TIME" "$fifo"
 fi
